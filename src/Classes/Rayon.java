@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Rayon {
     private String codeRayon;
@@ -11,13 +12,27 @@ public class Rayon {
     public Rayon(String codeRayon, String genre) {
         this.codeRayon = codeRayon;
         this.genre = genre;
-
     }
 
-    public Rayon(String codeRayon, String genre, List<Exemplaire> lex) {
-        this.codeRayon = codeRayon;
-        this.genre = genre;
-        this.lex = lex;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rayon rayon = (Rayon) o;
+        return Objects.equals(codeRayon, rayon.codeRayon);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codeRayon);
+    }
+
+    @Override
+    public String toString() {
+        return "Rayon{" +
+                "codeRayon='" + codeRayon + '\'' +
+                ", genre='" + genre + '\'' +
+                '}';
     }
 
     public String getCodeRayon() {
@@ -44,16 +59,5 @@ public class Rayon {
         this.lex = lex;
     }
 
-    @Override
-    public String toString() {
-        return "Rayon{" +
-                "codeRayon='" + codeRayon + '\'' +
-                ", genre='" + genre + '\'' +
-                '}';
-    }
 
-
-    public void listerExamplaires() {
-
-    }
 }

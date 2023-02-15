@@ -2,23 +2,37 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Exemplaire {
+
     private String matricule;
     private String descriptionEtat;
-    private List<Location> loc = new ArrayList<>();
+
+    private Ouvrage ouvrage;
     private Rayon rayon;
 
-    public Exemplaire(String matricule, String descriptionEtat) {
+    private List<Location> lloc= new ArrayList<>();
+
+
+    public Exemplaire(String matricule, String descriptionEtat,Ouvrage ouvrage) {
         this.matricule = matricule;
-        this.descriptionEtat = descriptionEtat;
+        this.descriptionEtat=descriptionEtat;
+        this.ouvrage = ouvrage;
+        this.ouvrage.getLex().add(this);
     }
 
-    public Exemplaire(String matricule, String descriptionEtat, List<Location> loc, Rayon rayon) {
-        this.matricule = matricule;
-        this.descriptionEtat = descriptionEtat;
-        this.loc = loc;
-        this.rayon = rayon;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exemplaire that = (Exemplaire) o;
+        return Objects.equals(matricule, that.matricule);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matricule);
     }
 
     public String getMatricule() {
@@ -37,12 +51,12 @@ public class Exemplaire {
         this.descriptionEtat = descriptionEtat;
     }
 
-    public List<Location> getLoc() {
-        return loc;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setLoc(List<Location> loc) {
-        this.loc = loc;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
     public Rayon getRayon() {
@@ -50,53 +64,26 @@ public class Exemplaire {
     }
 
     public void setRayon(Rayon rayon) {
-        this.rayon = rayon;
+        if(this.rayon!=null) this.rayon.getLex().remove(this);
+        this.rayon=rayon;
+        this.rayon.getLex().add(this);
     }
 
-    public void modifEtat() {
-
-
+    public List<Location> getLloc() {
+        return lloc;
     }
 
-    public void lecteurActuel() {
-
-
+    public void setLloc(List<Location> lloc) {
+        this.lloc = lloc;
     }
 
-    public void lecteurs() {
-
-
-    }
-
-    public void enVoiMailLecteurActuel(Mail mail) {
-
-
-    }
-
-    public void enVoiMailLecteurs(Mail mail) {
-
-
-    }
-
-    public boolean enRetard() {
-
-        return true;
-
-    }
-
-    public int joursRetard() {
-
-        return 0;
-    }
-
-    public boolean enLocation() {
-
-        return true;
-
-    }
-
-    public void rendre() {
-
-
+    @Override
+    public String toString() {
+        return "Exemplaire{" +
+                "matricule='" + matricule + '\'' +
+                ", descriptionEtat='" + descriptionEtat + '\'' +
+                ", ouvrage=" + ouvrage +
+                ", rayon=" + rayon +
+                '}';
     }
 }

@@ -1,28 +1,30 @@
 package Classes;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Ouvrage {
     protected String titre;
     protected int ageMin;
     protected LocalDate dateParution;
-    protected TypeOuvrage typeouvrage;
+    protected TypeOuvrage to;
     protected double prixLocation;
     protected String langue;
     protected String genre;
-    private Boolean enLocation = false;
+
+    protected List<Auteur> lauteurs=new ArrayList<>();
+    protected List<Exemplaire> lex = new ArrayList<>();
 
 
-    public Ouvrage(String titre, int ageMin, LocalDate dateParution, TypeOuvrage typeouvrage, double prixLocation, String langue, String genre) {
+    public Ouvrage(String titre, int ageMin, LocalDate dateParution, TypeOuvrage to, double prixLocation, String langue, String genre) {
         this.titre = titre;
         this.ageMin = ageMin;
         this.dateParution = dateParution;
-        this.typeouvrage = typeouvrage;
+        this.to = to;
         this.prixLocation = prixLocation;
         this.langue = langue;
         this.genre = genre;
-
     }
 
     public String getTitre() {
@@ -49,12 +51,12 @@ public abstract class Ouvrage {
         this.dateParution = dateParution;
     }
 
-    public TypeOuvrage getTypeouvrage() {
-        return typeouvrage;
+    public TypeOuvrage getTo() {
+        return to;
     }
 
-    public void setTypeouvrage(TypeOuvrage typeouvrage) {
-        this.typeouvrage = typeouvrage;
+    public void setTo(TypeOuvrage to) {
+        this.to = to;
     }
 
     public double getPrixLocation() {
@@ -81,20 +83,32 @@ public abstract class Ouvrage {
         this.genre = genre;
     }
 
-    public void listerExemplaires() {
-
-
+    public List<Auteur> getLauteurs() {
+        return lauteurs;
     }
 
-    public void listerExemplaires(Boolean EnLocation) {
-
-
+    public void setLauteurs(List<Auteur> lauteurs) {
+        this.lauteurs = lauteurs;
     }
 
-    public double amendeRetard(int njours) {
-
-        return 0;
+    public List<Exemplaire> getLex() {
+        return lex;
     }
 
+    public void setLex(List<Exemplaire> lex) {
+        this.lex = lex;
+    }
 
+    @Override
+    public String toString() {
+        return "Ouvrage{" +
+                "titre='" + titre + '\'' +
+                ", ageMin=" + ageMin +
+                ", dateParution=" + dateParution +
+                ", to=" + to +
+                ", prixLocation=" + prixLocation +
+                ", langue='" + langue + '\'' +
+                ", genre='" + genre + '\'' +
+                '}';
+    }
 }

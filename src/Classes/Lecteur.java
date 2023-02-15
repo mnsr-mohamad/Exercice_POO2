@@ -3,47 +3,58 @@ package Classes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Lecteur extends Personne {
-
-    private int numLecteur;
-    private String mail;
+public class Lecteur {
+    private int numlecteur;
+    private  String nom,prenom;
+    private LocalDate dn;
     private String adresse;
+    private String mail;
     private String tel;
-    private List<Location> loc = new ArrayList<>();
 
+    private List<Location> lloc=new ArrayList<>();
 
-    public Lecteur(String nom, String prenom, LocalDate dn) {
-        super(nom, prenom, dn);
-        this.numLecteur = numLecteur;
+    public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) {
+        this.numlecteur = numlecteur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dn = dn;
         this.adresse = adresse;
         this.mail = mail;
         this.tel = tel;
     }
 
-    public Lecteur(String nom, String prenom, LocalDate dn, int numLecteur, String mail, String adresse, String tel, List<Location> loc) {
-        super(nom, prenom, dn);
-        this.numLecteur = numLecteur;
-        this.mail = mail;
-        this.adresse = adresse;
-        this.tel = tel;
-        this.loc = loc;
+    public int getNumlecteur() {
+        return numlecteur;
     }
 
-    public int getNumLecteur() {
-        return numLecteur;
+    public void setNumlecteur(int numlecteur) {
+        this.numlecteur = numlecteur;
     }
 
-    public void setNumLecteur(int numLecteur) {
-        this.numLecteur = numLecteur;
+    public String getNom() {
+        return nom;
     }
 
-    public String getMail() {
-        return mail;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public LocalDate getDn() {
+        return dn;
+    }
+
+    public void setDn(LocalDate dn) {
+        this.dn = dn;
     }
 
     public String getAdresse() {
@@ -54,6 +65,14 @@ public class Lecteur extends Personne {
         this.adresse = adresse;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public String getTel() {
         return tel;
     }
@@ -62,35 +81,37 @@ public class Lecteur extends Personne {
         this.tel = tel;
     }
 
-    public List<Location> getLoc() {
-        return loc;
+    public List<Location> getLloc() {
+        return lloc;
     }
 
-    public void setLoc(List<Location> loc) {
-        this.loc = loc;
+    public void setLloc(List<Location> lloc) {
+        this.lloc = lloc;
     }
-
 
     @Override
     public String toString() {
         return "Lecteur{" +
-                "numLecteur=" + numLecteur +
-                ", mail='" + mail + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", tel='" + tel + '\'' +
+                "numlecteur=" + numlecteur +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", dn=" + dn +
+                ", adresse='" + adresse + '\'' +
+                ", mail='" + mail + '\'' +
+                ", tel='" + tel + '\'' +
                 '}';
     }
 
-    public void listerExemplairesEnLocation() {
-
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lecteur lecteur = (Lecteur) o;
+        return numlecteur == lecteur.numlecteur;
     }
 
-    public void listerExemplairesEnLoues() {
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(numlecteur);
     }
 }
