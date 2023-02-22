@@ -1,43 +1,175 @@
 package Classes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Gestion {
-    public static void main(String[] args){
 
+
+    private static List<Auteur> laut = new ArrayList<>();
+    private static List<Lecteur> llect = new ArrayList<>();
+    private static List<Ouvrage> louv= new ArrayList<>();
+    private static List<Exemplaire> lex = new ArrayList<>();
+    private static List<Rayon> lrayon= new ArrayList<>();
+    private static List<Location> lloc = new ArrayList<>();
+
+
+    public static void populate(){
         Auteur a = new Auteur("Verne","Jules","France");
+        laut.add(a);
+
         Livre l = new Livre("Vingt mille lieues sous les mers",10, LocalDate.of(1880,1,1),1.50,"français","aventure","a125",350,TypeLivre.ROMAN,"histoire de sous-marin");
+        louv.add(l);
+
         //a.getLouvrage().add(l);
         //l.getLauteurs().add(a);
-        addLouvrage(a, l);
-        addLauteur(l, a);
-        Rayon r=new Rayon("120DFC","Bibliothèque");
-        Exemplaire e = new Exemplaire("m12","état neuf",l);
-        e.setRayon(r);
-        r.getLex().add(e);
-        Lecteur lec = new Lecteur(1,"Dupont","Jean", LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
-        Location loc = new Location(LocalDate.of(2023,2,1),LocalDate.of(2023,3,1),lec,e);
-        lec.getLloc().add(loc);
-        e.getLloc().add(loc);
-        System.out.println(a);
+        a.addOuvrage(l);
         System.out.println(a.getLouvrage());
-        System.out.println(l);
-        System.out.println(l.getLauteurs());
-        System.out.println(r);
-        System.out.println(e);
-        System.out.println(lec);
-        System.out.println(loc);
+
+        a = new Auteur("Spielberg","Steven","USA");
+        laut.add(a);
+
+        DVD d = new DVD("AI",12,LocalDate.of(2000,10,1),2.50,"anglais","SF",4578l,"120 min",(byte)2);
+        d.getAutresLangues().add("français");
+        d.getAutresLangues().add("italien");
+        d.getSousTitres().add("néerlandais");
+        louv.add(d);
+
+        //a.getLouvrage().add(d);
+        //d.getLauteurs().add(a);
+        a.addOuvrage(d);
+        a = new Auteur("Kubrick","Stanley","GB");
+        laut.add(a);
+
+        //a.getLouvrage().add(d);
+        //d.getLauteurs().add(a);
+        a.addOuvrage(d);
+        System.out.println(a.getLouvrage());
+
+        CD c = new CD("The Compil 2023",0,LocalDate.of(2023,1,1),2,"English","POP",1245,(byte)20,"100 min");
+        louv.add(c);
+
+        Rayon r = new Rayon("r12","aventure");
+        lrayon.add(r);
+
+        Exemplaire e = new Exemplaire("m12","état neuf",l);
+        lex.add(e);
+
+        // e.setRayon(r);
+        //r.getLex().add(e);
+        r.addExemplaire(e);
+        System.out.println(r.getLex());
+
+        r = new Rayon("r45","science fiction");
+        lrayon.add(r);
+
+        e = new Exemplaire("d12","griffé",d);
+        lex.add(e);
+
+        //e.setRayon(r);
+        //r.getLex().add(e);
+        r.addExemplaire(e);
+        System.out.println(r.getLex());
+
+        Lecteur lec = new Lecteur(1,"Dupont","Jean",LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
+        llect.add(lec);
+
+        Location loc = new Location(LocalDate.of(2023,2,1),LocalDate.of(2023,3,1),lec,e);
+        //lec.getLloc().add(loc);
+        //e.getLloc().add(loc);
 
 
+        lloc.add(loc);
+
+        lec = new Lecteur(1,"Durant","Aline",LocalDate.of(1980,10,10),"Binche","aline.durant@mail.com","045874444");
+        llect.add(lec);
+
+        loc = new Location(LocalDate.of(2023,2,5),LocalDate.of(2023,3,5),lec,e);
+        //lec.getLloc().add(loc);
+       // e.getLloc().add(loc);
+
+        lloc.add(loc);
+    }
+    public static void main(String[] args) {
+
+        populate();
+        Scanner sc = new Scanner(System.in);
+        int choix;
+
+        do{
+            System.out.println(("1.Auteurs 2.Ouvrages 3.Lecteurs 4.Rayons 5.Exemplaire 6.Location 7.Retour 8.Fin"));
+            choix=sc.nextInt();
+            switch (choix){
+                case 1 : gestAuteurs();
+                break;
+
+                case 2 : gestOuvrages();
+                break;
+
+                case 3 : gestLecteurs();
+                break;
+
+                case 4 : gestRayon();
+                break;
+
+                case 5 : gestExemplaire();
+                break;
+
+                case 6 : gestLouer();
+                break;
+
+                case 7 : gestRetour();
+                break ;
+
+                case 8 :
+                    System.out.println("FIN");
+                break;
+                default:
+            }
+
+        }
+        while(choix!=8);
+    }
+
+
+    private static void gestAuteurs(){
+
+    }
+
+    private static void gestOuvrages(){
 
 
     }
-    public static void addLouvrage(Auteur a, Livre l) {
-        a.getLouvrage().add(l);
+
+    private static void gestLecteurs(){
+
+
     }
 
-    public static void addLauteur(Livre l, Auteur a) {
-        l.getLauteurs().add(a);
+    private static void gestRayon(){
+
+
     }
+
+    private static void gestExemplaire(){
+
+
+    }
+
+    private  static void gestLouer(){
+
+
+    }
+
+    private static void gestRetour(){
+
+
+    }
+
+
 
 }
+
+
