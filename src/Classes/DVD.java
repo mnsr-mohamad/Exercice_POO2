@@ -71,7 +71,11 @@ public class DVD extends Ouvrage{
     public int hashCode() {
         return Objects.hash(code);
     }
-
+    @Override
+    public double amendeRetard(int njours) {
+        //TODO amendeRetard DVD
+        return 0;
+    }
     @Override
     public String toString() {
         return super.toString()+"DVD{" +
@@ -82,6 +86,4 @@ public class DVD extends Ouvrage{
                 ", sousTitres=" + sousTitres +
                 "} " + super.toString();
     }
-
-
 }

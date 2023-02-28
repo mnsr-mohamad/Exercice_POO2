@@ -114,4 +114,14 @@ public class Lecteur {
     public int hashCode() {
         return Objects.hash(numlecteur);
     }
+
+    public List<Exemplaire> listerExemplairesEnLocation(){
+        //TODO lister exemplaires en location lecteur
+        return null;
+    }
+
+    public List<Exemplaire> listerExemplairesEnLoues(){
+        //TODO lister exemplaires loues lecteur
+        return null;
+    }
 }
