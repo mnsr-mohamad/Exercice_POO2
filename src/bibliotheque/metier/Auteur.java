@@ -71,6 +71,7 @@ public class Auteur {
                 "nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", nationalite='" + nationalite + '\'' +
+                ", louvrage=" + louvrage +
                 '}';
     }
 

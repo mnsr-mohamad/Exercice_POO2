@@ -5,10 +5,7 @@ import bibliotheque.utilitaires.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Gestion {
     Scanner sc = new Scanner(System.in);
@@ -170,6 +167,7 @@ List<Location> lo=new ArrayList<>();
         System.out.println("genre ");
         String genre=sc.next();
         Rayon r = new Rayon(code,genre);
+        lrayon.add(r);
         System.out.println("rayon créé");
 
         //TODO attribuer exemplaire, les exemplaires sont triés par ordre de titre de l'ouvrage , empêcher doublons sur l'exemplaire
@@ -180,12 +178,30 @@ List<Location> lo=new ArrayList<>();
         String mat=sc.next();
         System.out.println("etat  ");
         String etat=sc.next();
+
         System.out.println("ouvrage ");
         int choix = Utilitaire.choixListe(louv);
         Exemplaire ex = new Exemplaire(mat,etat,louv.get(choix-1));
         lex.add(ex);
         System.out.println("exemplaire créé");
         //TODO attribuer rayon , les rayons sont triès par ordre de code
+
+        Collections.sort(lrayon);
+
+        System.out.println("Liste des rayons :");
+        for (int i = 0; i < lrayon.size(); i++) {
+            System.out.println((i + 1) + ". " + lrayon.get(i));
+        }
+        System.out.println("Veuillez choisir le numéro du rayon :");//va créer une copie de la liste lrayon et la trier par ordre de code. Vous pouvez ensuite utiliser cette liste pour afficher les rayons et permettre à l'utilisateur de choisir un rayon.
+        int choixRayon = sc.nextInt();
+        Rayon rayonChoisi = lrayon.get(choixRayon - 1);
+        rayonChoisi.addExemplaire(ex);
+
+        System.out.println("Liste des exemplaire déjà existant : ");
+        sc.skip("\n");
+        for (int i = 0; i < lex.size(); i++) {
+            System.out.println((i + 1) + ". " + lex.get(i));
+        }
     }
 
     private void gestOuvrages() {
@@ -270,6 +286,8 @@ List<Location> lo=new ArrayList<>();
         louv.add(o);
         System.out.println("ouvrage créé");
         //TODO attribuer auteurs, les auteur sont triés par odre de nom et prénom, empêcher doublons
+
+
     }
 
        private void gestAuteurs() {
@@ -283,6 +301,19 @@ List<Location> lo=new ArrayList<>();
         laut.add(a);
         System.out.println("écrivain créé");
         //TODO attribuer ouvrages , les ouvrages sont triés par ordre de titre
+
+           Collections.sort(louv);
+
+
+           int choix = Utilitaire.choixListe(louv);
+           Ouvrage ouvrageChoisi = louv.get(choix-1);
+           ouvrageChoisi.addAuteur(a);
+
+           System.out.println("Liste des auteurs avec ouvrages : ");
+           for (int i = 0; i < laut.size(); i++) {
+               System.out.println((i + 1) + ". " + laut.get(i));
+           }
+
     }
 
     public static void main(String[] args) {

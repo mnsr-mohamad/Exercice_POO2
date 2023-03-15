@@ -36,6 +36,8 @@ public class Exemplaire {
         return Objects.equals(matricule, that.matricule);
     }
 
+
+
     @Override
     public int hashCode() {
         return Objects.hash(matricule);

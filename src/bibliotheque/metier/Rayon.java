@@ -1,10 +1,8 @@
 package bibliotheque.metier;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class Rayon {
+public class Rayon implements Comparable{
     private String codeRayon;
     private String genre;
     private List<Exemplaire> lex = new ArrayList<>();
@@ -15,18 +13,10 @@ public class Rayon {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rayon rayon = (Rayon) o;
-        return Objects.equals(codeRayon, rayon.codeRayon);
-    }
+    public int compareTo(Object o){
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(codeRayon);
+        return Integer.parseInt(String.valueOf(this.codeRayon.compareTo(((Rayon)o).codeRayon)));
     }
-
     @Override
     public String toString() {
         return "Rayon{" +
@@ -43,6 +33,13 @@ public class Rayon {
         lex.remove(e);
         e.setRayon(null);
     }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codeRayon);
+    }
+
     public String getCodeRayon() {
         return codeRayon;
     }
