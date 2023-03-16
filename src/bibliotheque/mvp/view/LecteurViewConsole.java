@@ -63,9 +63,7 @@ public class LecteurViewConsole implements LecteurViewInterface {
         int choix=Utilitaire.choixElt(llec);
         Lecteur lecteur = llec.get(choix-1);
         opModification(lecteur);
-        System.out.println("Entrez les nouvelles données du lecteur : \n");
 
-        presenter.modifierLecteur(lecteur);
 
     }
 
