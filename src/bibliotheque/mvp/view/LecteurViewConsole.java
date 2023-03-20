@@ -59,18 +59,29 @@ public class LecteurViewConsole implements LecteurViewInterface {
 
     private void modifier() {
         //TODO choisir elt et demander les nouvelles valeurs puis appeler méthode maj(lecteur) (à développer) du presenter
-        Utilitaire.affListe(llec);
-        int choix=Utilitaire.choixElt(llec);
-        Lecteur lecteur = llec.get(choix-1);
-        opModification(lecteur);
+
+        if (!llec.isEmpty()) {
+            Utilitaire.affListe(llec);
+            int choix = Utilitaire.choixElt(llec);
+            Lecteur lecteur = llec.get(choix - 1);
+            opModification(lecteur);
+        } else {
+            System.out.println("Aucun lecteur trouvé");
+        }
 
 
     }
 
     private void retirer() {
-        int choix = Utilitaire.choixElt(llec);
-        Lecteur lecteur = llec.get(choix-1);
-        presenter.removeLecteur(lecteur);
+        if (!llec.isEmpty()) {
+            Utilitaire.affListe(llec);
+            int choix = Utilitaire.choixElt(llec);
+            Lecteur lecteur = llec.get(choix - 1);
+            presenter.removeLecteur(lecteur);
+        } else {
+            System.out.println("Aucun lecteur trouvé");
+        }
+
     }
 
 
@@ -95,8 +106,8 @@ public class LecteurViewConsole implements LecteurViewInterface {
         presenter.addLecteur(lec);
     }
 
-    public void opModification(Lecteur lecteur){
-        List options = new ArrayList<>(Arrays.asList("Nom", "Prenom", "Date de naissance", "Adresse","Mail","Tel","Revenir en arrière"));
+    public void opModification(Lecteur lecteur) {
+        List options = new ArrayList<>(Arrays.asList("Nom", "Prenom", "Date de naissance", "Adresse", "Mail", "Tel", "Revenir en arrière"));
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -125,17 +136,17 @@ public class LecteurViewConsole implements LecteurViewInterface {
                     String adr = sc.nextLine();
                     lecteur.setAdresse(adr);
                     break;
-                case 5 :
+                case 5:
                     System.out.println("mail : ");
                     String mail = sc.nextLine();
                     lecteur.setMail(mail);
                     break;
-                case 6 :
+                case 6:
                     System.out.println("tel :  ");
                     String tel = sc.nextLine();
                     lecteur.setTel(tel);
                     break;
-                case 7 :
+                case 7:
                     return;
             }
             presenter.modifierLecteur(lecteur);
@@ -144,7 +155,6 @@ public class LecteurViewConsole implements LecteurViewInterface {
 
 
     }
-
 
 
 }

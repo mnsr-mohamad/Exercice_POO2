@@ -1,5 +1,6 @@
 package bibliotheque.mvp.model;
 
+import bibliotheque.metier.Auteur;
 import bibliotheque.metier.Lecteur;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface DAOLecteur {
     List<Lecteur> getLecteurs();
 
     Lecteur modifierLecteur(Lecteur lec);
+
+
 }
