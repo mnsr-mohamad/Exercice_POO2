@@ -1,29 +1,48 @@
 package bibliotheque.mvp;
 
-import bibliotheque.mvp.model.AuteurModel;
-import bibliotheque.mvp.model.DAOAuteur;
-import bibliotheque.mvp.model.DAOLecteur;
-import bibliotheque.mvp.model.LecteurModel;
+import bibliotheque.mvp.model.*;
 import bibliotheque.mvp.presenter.AuteurPresenter;
 import bibliotheque.mvp.presenter.LecteurPresenter;
-import bibliotheque.mvp.view.AuteurViewConsole;
-import bibliotheque.mvp.view.AuteurViewInterface;
-import bibliotheque.mvp.view.LecteurViewConsole;
-import bibliotheque.mvp.view.LecteurViewInterface;
+import bibliotheque.mvp.presenter.RayonPresenter;
+import bibliotheque.mvp.view.*;
+import bibliotheque.utilitaires.Utilitaire;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GestBiblio {
+
     public static void main(String[] args) {
-       /*DAOLecteur lm = new LecteurModel();
+        List options = new ArrayList<>(Arrays.asList("Lecteur", "Auteur", "Rayon", "Fin"));
+        do {
+            int ch = Utilitaire.choixListe(options);
 
-        LecteurViewInterface lv = new LecteurViewConsole();
+            switch (ch) {
+                case 1:
+                    DAOLecteur lm = new LecteurModel();
+                    LecteurViewInterface lv = new LecteurViewConsole();
+                    LecteurPresenter lp = new LecteurPresenter(lm, lv);
+                    lp.start();
+                    break;
+                case 2:
+                    DAOAuteur am = new AuteurModel();
+                    AuteurViewInterface av = new AuteurViewConsole();
+                    AuteurPresenter ap = new AuteurPresenter(am, av);
+                    ap.start();
+                    break;
+                case 3:
+                    DAORayon rm = new RayonModel();
+                    RayonViewInterface rv = new RayonViewConsole();
+                    RayonPresenter rp = new RayonPresenter(rm, rv);
+                    rp.start();
+                    break;
 
-        LecteurPresenter lp = new LecteurPresenter(lm, lv);//création et injection de dépendance
-        lp.start();*/
+                case 4:
+                    System.exit(0);
+            }
 
-        DAOAuteur lm = new AuteurModel();
-        AuteurViewInterface lv = new AuteurViewConsole();
-        AuteurPresenter lp = new AuteurPresenter(lm,lv);
-        lp.start();
+        } while (true);
 
 
     }

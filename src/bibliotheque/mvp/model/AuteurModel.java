@@ -6,9 +6,10 @@ import bibliotheque.metier.Lecteur;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuteurModel implements DAOAuteur{
+public class AuteurModel implements DAOAuteur {
 
     private List<Auteur> auteurs = new ArrayList<>();
+
     @Override
     public Auteur addAuteur(Auteur laut) {
         boolean present= auteurs.contains(laut);
@@ -19,8 +20,9 @@ public class AuteurModel implements DAOAuteur{
         else return null;
     }
 
+
     @Override
-    public boolean removeAuteur(Auteur laut)  {
+    public boolean removeAuteur(Auteur laut) {
         return auteurs.remove(laut);
     }
 
@@ -31,10 +33,9 @@ public class AuteurModel implements DAOAuteur{
 
     @Override
     public Auteur modifierAuteur(Auteur laut) {
-        boolean present= auteurs.contains(laut.getNom()) && auteurs.contains(laut.getPrenom());
-        if(!present){
+        boolean present = auteurs.contains(laut.getNom()) && auteurs.contains(laut.getPrenom());
+        if (!present) {
             return laut;
-        }
-        else return null;
+        } else return null;
     }
 }
