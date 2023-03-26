@@ -1,7 +1,9 @@
 package bibliotheque.mvp.presenter;
 
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Lecteur;
 import bibliotheque.mvp.model.DAOLecteur;
+import bibliotheque.mvp.model.SpecialLecteur;
 import bibliotheque.mvp.view.LecteurViewInterface;
 
 import java.util.List;
@@ -48,5 +50,17 @@ public class LecteurPresenter {
         view.setListDatas(lecteurs);
 
 
+    }
+
+
+    public void exemplairesEnLocation(Lecteur l) {
+        List<Exemplaire> lex =   ((SpecialLecteur)model).exemplairesEnLocation(l);
+        if(lex==null || lex.isEmpty()) view.affMsg("aucun exemplaire trouvé");
+        else view.affList(lex);
+    }
+    public void exemplairesLoues(Lecteur l) {
+        List<Exemplaire> lex =   ((SpecialLecteur)model).exemplairesLoues(l);
+        if(lex==null || lex.isEmpty()) view.affMsg("aucun exemplaire trouvé");
+        else view.affList(lex);
     }
 }

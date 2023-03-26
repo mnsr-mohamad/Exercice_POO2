@@ -1,5 +1,6 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Lecteur;
 import bibliotheque.mvp.presenter.LecteurPresenter;
 import bibliotheque.utilitaires.Utilitaire;
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static bibliotheque.utilitaires.Utilitaire.affListe;
+import static bibliotheque.utilitaires.Utilitaire.choixElt;
 
 public class LecteurViewConsole implements LecteurViewInterface {
     private LecteurPresenter presenter;
@@ -36,8 +40,13 @@ public class LecteurViewConsole implements LecteurViewInterface {
         System.out.println("information:" + msg);
     }
 
+    @Override
+    public void affList(List<Exemplaire> lex) {
+        affListe(lex);
+    }
+
     public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier",  "revenir en arrière"));
+        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special", "revenir en arrière"));
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -52,7 +61,10 @@ public class LecteurViewConsole implements LecteurViewInterface {
                     modifier();
                     break;
                 case 4:
-                   return;
+                    special();
+                    break;
+                case 5:
+                    return;
             }
         } while (true);
     }
@@ -153,9 +165,31 @@ public class LecteurViewConsole implements LecteurViewInterface {
 
         } while (true);
 
-
     }
+    private void special(){
 
+    int choix =  choixElt(llec);
+    Lecteur lec = llec.get(choix-1);
+            do {
+        System.out.println("1.Exemplaire en location\n2.Exemplaires loués\n3.menu principal");
+        System.out.println("choix : ");
+        int ch = sc.nextInt();
+        sc.skip("\n");
+        switch (ch) {
+            case 1:
+                presenter.exemplairesEnLocation(lec);
+                break;
+            case 2:
+                presenter.exemplairesLoues(lec);
+                break;
+            case 3: return;
+            default:
+                System.out.println("choix invalide recommencez ");
+        }
+    } while (true);
+
+
+}
 
 }
 
