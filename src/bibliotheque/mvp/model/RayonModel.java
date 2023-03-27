@@ -1,11 +1,13 @@
 package bibliotheque.mvp.model;
 
+import bibliotheque.metier.Exemplaire;
+import bibliotheque.metier.Lecteur;
 import bibliotheque.metier.Rayon;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RayonModel implements DAORayon {
+public class RayonModel implements DAORayon,SpecialRayon {
     private List<Rayon> rayons = new ArrayList<>();
 
 
@@ -34,6 +36,12 @@ public class RayonModel implements DAORayon {
         if (!present) {
             return lrayon;
         } else return null;
+    }
+
+
+    @Override
+    public List<Exemplaire> lExemplaires(Rayon r) {
+    return  r.listerExemplaires();
     }
 }
 

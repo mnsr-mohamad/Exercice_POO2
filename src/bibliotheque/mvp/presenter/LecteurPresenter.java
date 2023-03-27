@@ -51,7 +51,11 @@ public class LecteurPresenter {
 
 
     }
-
+    public void search(int idLecteur) {
+        Lecteur l = model.readLecteur(idLecteur);
+        if(l==null) view.affMsg("recherche infructueuse");
+        else view.affMsg(l.toString());
+    }
 
     public void exemplairesEnLocation(Lecteur l) {
         List<Exemplaire> lex =   ((SpecialLecteur)model).exemplairesEnLocation(l);

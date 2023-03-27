@@ -15,6 +15,8 @@ import java.util.List;
 public class GestBiblio {
 
     public static void main(String[] args) {
+
+
         List options = new ArrayList<>(Arrays.asList("Lecteur", "Auteur", "Rayon", "Ouvrage", "Fin"));
         do {
             int ch = Utilitaire.choixListe(options);

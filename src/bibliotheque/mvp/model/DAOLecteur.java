@@ -14,5 +14,7 @@ public interface DAOLecteur {
 
     Lecteur modifierLecteur(Lecteur lec);
 
+    Lecteur readLecteur(int idLecteur);
+
 
 }

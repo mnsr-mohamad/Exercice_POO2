@@ -46,7 +46,7 @@ public class LecteurViewConsole implements LecteurViewInterface {
     }
 
     public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special", "revenir en arrière"));
+        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "rechercher","special", "revenir en arrière"));
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -61,9 +61,12 @@ public class LecteurViewConsole implements LecteurViewInterface {
                     modifier();
                     break;
                 case 4:
-                    special();
+                    rechercher();
                     break;
                 case 5:
+                    special();
+                    break;
+                case 6 :
                     return;
             }
         } while (true);
@@ -96,7 +99,11 @@ public class LecteurViewConsole implements LecteurViewInterface {
 
     }
 
-
+    private void rechercher() {
+        System.out.println("numLecteur : ");
+        int idLecteur = sc.nextInt();
+        presenter.search(idLecteur);
+    }
     private void ajouter() {
         System.out.println("nom ");
         String nom = sc.nextLine();

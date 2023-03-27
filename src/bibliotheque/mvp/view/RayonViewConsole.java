@@ -1,5 +1,6 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Rayon;
 import bibliotheque.mvp.presenter.AuteurPresenter;
 import bibliotheque.mvp.presenter.RayonPresenter;
@@ -10,7 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class RayonViewConsole implements RayonViewInterface{
+import static bibliotheque.utilitaires.Utilitaire.affListe;
+import static bibliotheque.utilitaires.Utilitaire.choixElt;
+
+public class RayonViewConsole implements RayonViewInterface {
 
     private RayonPresenter presenter;
     private List<Rayon> lrayon;
@@ -37,8 +41,13 @@ public class RayonViewConsole implements RayonViewInterface{
         System.out.println("information:" + msg);
     }
 
+    @Override
+    public void affList(List<Exemplaire> lex) {
+        affListe(lex);
+    }
+
     public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "revenir en arrière"));
+        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special ", "revenir en arrière"));
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -53,7 +62,10 @@ public class RayonViewConsole implements RayonViewInterface{
                     modifier();
                     break;
                 case 4:
-                  return;
+                    special();
+                    break;
+                case 5:
+                    return;
             }
         } while (true);
     }
@@ -77,7 +89,7 @@ public class RayonViewConsole implements RayonViewInterface{
         if (!lrayon.isEmpty()) {
             Utilitaire.affListe(lrayon);
             int choix = Utilitaire.choixElt(lrayon);
-            Rayon rayon= lrayon.get(choix - 1);
+            Rayon rayon = lrayon.get(choix - 1);
             presenter.removeRayon(rayon);
         } else {
             System.out.println("Aucun rayon trouvé");
@@ -91,7 +103,7 @@ public class RayonViewConsole implements RayonViewInterface{
         String code = sc.nextLine();
         System.out.println("genre :  ");
         String genre = sc.nextLine();
-        Rayon lr = new Rayon(code,genre);
+        Rayon lr = new Rayon(code, genre);
         presenter.addRayon(lr);
     }
 
@@ -121,7 +133,32 @@ public class RayonViewConsole implements RayonViewInterface{
 
     }
 
+    private void special() {
 
+        int choix = choixElt(lrayon);
+        Rayon ray = lrayon.get(choix - 1);
+        do {
+            System.out.println("1.Exemplaire selon le rayon\n2.menu principal");
+            System.out.println("choix : ");
+            int ch = sc.nextInt();
+            sc.skip("\n");
+            switch (ch) {
+                case 1:
+                    presenter.lExemplaires(ray);
+                    break;
+                case 2:
+                    return;
+
+                default:
+                    System.out.println("choix invalide recommencez ");
+            }
+        } while (true);
+
+
+    }
 
 
 }
+
+
+
