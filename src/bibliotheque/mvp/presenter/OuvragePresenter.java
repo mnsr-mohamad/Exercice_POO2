@@ -1,7 +1,9 @@
 package bibliotheque.mvp.presenter;
 
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Ouvrage;
 import bibliotheque.mvp.model.DAOOuvrage;
+import bibliotheque.mvp.model.SpecialOuvrage;
 import bibliotheque.mvp.view.OuvrageViewInterface;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class OuvragePresenter {
 
     public void addOuvrage(Ouvrage ouvrage) {
         Ouvrage ouv = model.addOuvrage(ouvrage);
-        if(ouv!=null) view.affMsg("création de : "+ouv);
+        if (ouv != null) view.affMsg("création de : " + ouv);
         else view.affMsg("erreur de création");
         List<Ouvrage> ouvrages = model.getOuvrages();
         view.setListDatas(ouvrages);
@@ -32,17 +34,42 @@ public class OuvragePresenter {
 
     public void removeOuvrage(Ouvrage ouvrage) {
         boolean ok = model.removeOuvrage(ouvrage);
-        if(ok) view.affMsg("ouvrage effacé");
+        if (ok) view.affMsg("ouvrage effacé");
         else view.affMsg("ouvrage non effacé");
         List<Ouvrage> ouvrages = model.getOuvrages();
         view.setListDatas(ouvrages);
     }
 
-    public void modifOuvrage(Ouvrage ouvrage){
+    public void modifOuvrage(Ouvrage ouvrage) {
         Ouvrage ouv = model.modifOuvrage(ouvrage);
-        if(ouv!=null) view.affMsg("Modification de : "+ouv);
+        if (ouv != null) view.affMsg("Modification de : " + ouv);
         else view.affMsg("erreur de modification");
         List<Ouvrage> ouvrages = model.getOuvrages();
         view.setListDatas(ouvrages);
+    }
+
+    public void lExemplaire(Ouvrage o) {
+        List<Exemplaire> lex = ((SpecialOuvrage) model).lExemplaire(o);
+        if (lex == null || lex.isEmpty()) view.affMsg("aucun exemplaire trouvé");
+        else view.affList(lex);
+
+    }
+
+    public void lExemplaireLoc(Ouvrage o) {
+        List<Exemplaire> lex = ((SpecialOuvrage) model).lExemplaireLoc(o);
+        if (lex == null || lex.isEmpty()) view.affMsg("aucun exemplaire trouvé");
+        else view.affList(lex);
+    }
+
+
+   public void lAmendeEnRetard(Ouvrage o,int nbreJours){
+
+        double amende= ((SpecialOuvrage) model).lAmendeEnRetard(o,nbreJours);
+        if (amende == 0) view.affMsg("aucun amende à payer ");
+        else {
+            view.affMsg("L'amende est de :  "+amende);
+        }
+
+
     }
 }

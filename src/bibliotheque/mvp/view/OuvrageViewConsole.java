@@ -1,5 +1,7 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.metier.Exemplaire;
+import bibliotheque.metier.Lecteur;
 import bibliotheque.metier.Ouvrage;
 import bibliotheque.metier.TypeOuvrage;
 import bibliotheque.mvp.presenter.OuvragePresenter;
@@ -12,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static bibliotheque.utilitaires.Utilitaire.affListe;
+import static bibliotheque.utilitaires.Utilitaire.choixElt;
 
 public class OuvrageViewConsole implements OuvrageViewInterface {
     private OuvragePresenter presenter;
@@ -38,8 +43,13 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
         System.out.println("information : " + msg);
     }
 
+    @Override
+    public void affList(List<Exemplaire> lex) {
+        affListe(lex);
+    }
+
     public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "fin"));
+        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier","special" ,"fin"));
         do {
             int ch = Utilitaire.choixListe(options);
             switch (ch) {
@@ -53,6 +63,9 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
                     modifier();
                     break;
                 case 4:
+                    special();
+                    break;
+                case 5 :
                     System.exit(0);
             }
         } while (true);
@@ -103,5 +116,37 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
         String newValue= sc.nextLine();
         if(newValue.isBlank()) return oldValue;
         return newValue;
+    }
+
+
+    private void special(){
+        int choix =  choixElt(louv);
+        Ouvrage llouv = louv.get(choix-1);
+        do {
+            System.out.println("1.Afficher exemplaire\n2.Exemplaires en Location\n3.Amende\n4.revenir au menu principal");
+            System.out.println("choix : ");
+            int ch = sc.nextInt();
+            sc.skip("\n");
+            switch (ch) {
+                case 1:
+                    presenter.lExemplaire(llouv);
+                    break;
+                case 2:
+                    presenter.lExemplaireLoc(llouv);
+                    break;
+                case 3:
+                    //presenter.lAmendeEnRetard(llouv);
+                    break;
+                case 4 :
+                    return;
+                default:
+                    System.out.println("choix invalide recommencez ");
+            }
+        } while (true);
+
+
+
+
+
     }
 }

@@ -13,7 +13,7 @@ public abstract class Ouvrage implements Comparable {
     protected String langue;
     protected String genre;
 
-    protected List<Auteur> lauteurs=new ArrayList<>();
+    protected List<Auteur> lauteurs = new ArrayList<>();
     protected List<Exemplaire> lex = new ArrayList<>();
 
 
@@ -119,37 +119,41 @@ public abstract class Ouvrage implements Comparable {
 
 
     @Override
-    public int compareTo(Object o){
+    public int compareTo(Object o) {
 
-        return Integer.parseInt(String.valueOf(this.titre.compareTo(((Ouvrage)o).titre)));
+        return Integer.parseInt(String.valueOf(this.titre.compareTo(((Ouvrage) o).titre)));
     }
-    public void addAuteur(Auteur a ){
+
+    public void addAuteur(Auteur a) {
         lauteurs.add(a);
         a.getLouvrage().add(this);
     }
 
-    public void remove(Auteur a){
+    public void remove(Auteur a) {
         lauteurs.remove(a);
         a.getLouvrage().remove(this);
     }
-    public void addExemplaire(Exemplaire e){
+
+    public void addExemplaire(Exemplaire e) {
         lex.add(e);
         e.setOuvrage(this);
     }
 
-    public void remove(Exemplaire e){
+    public void remove(Exemplaire e) {
         lex.remove(e);
         e.setOuvrage(null);
     }
-    public List<Exemplaire>listerExemplaires(){
+
+    public List<Exemplaire> listerExemplaires() {
         return lex;
     }
 
-    public List<Exemplaire>listerExemplaires(boolean enLocation){
+    public List<Exemplaire> listerExemplaires(boolean enLocation) {
         List<Exemplaire> lex2 = new ArrayList<>();
-        for(Exemplaire ex : lex){
-            if(ex.enLocation()==enLocation) lex2.add(ex);
+        for (Exemplaire ex : lex) {
+            if (ex.enLocation() == enLocation) lex2.add(ex);
         }
         return lex2;
     }
+
 }

@@ -1,11 +1,12 @@
 package bibliotheque.mvp.model;
 
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Ouvrage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OuvrageModel implements DAOOuvrage {
+public class OuvrageModel implements DAOOuvrage,SpecialOuvrage {
     List<Ouvrage> ouvrages = new ArrayList<>();
 
     @Override
@@ -35,5 +36,20 @@ public class OuvrageModel implements DAOOuvrage {
             return ouv;
         }
         else return null;
+    }
+
+    @Override
+    public List<Exemplaire> lExemplaire(Ouvrage o) {
+        return o.listerExemplaires();
+    }
+
+    @Override
+    public List<Exemplaire> lExemplaireLoc(Ouvrage o) {
+        return o.listerExemplaires();
+    }
+
+    @Override
+    public double lAmendeEnRetard(Ouvrage o, int nbreJours) {
+        return o.amendeRetard(nbreJours);
     }
 }
