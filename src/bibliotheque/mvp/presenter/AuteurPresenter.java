@@ -1,7 +1,12 @@
 package bibliotheque.mvp.presenter;
 
 import bibliotheque.metier.Auteur;
+import bibliotheque.metier.Exemplaire;
+import bibliotheque.metier.Lecteur;
+import bibliotheque.metier.Ouvrage;
 import bibliotheque.mvp.model.DAOAuteur;
+import bibliotheque.mvp.model.SpecialAuteur;
+import bibliotheque.mvp.model.SpecialLecteur;
 import bibliotheque.mvp.view.AuteurViewInterface;
 
 import java.util.List;
@@ -45,4 +50,13 @@ public class AuteurPresenter {
             List<Auteur> auteurs = model.getAuteurs();
             view.setListDatas(auteurs);
     }
+
+    public void lOuvrage(Auteur a) {
+        List<Ouvrage> lex =  ((SpecialAuteur)model).lOuvrage(a);
+        if(lex==null || lex.isEmpty()) view.affMsg("aucun ouvrage trouvé");
+        else view.affList(lex);
+    }
+   //finir auteur
+
+
 }
