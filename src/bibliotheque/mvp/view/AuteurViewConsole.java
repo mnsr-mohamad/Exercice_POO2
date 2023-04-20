@@ -47,6 +47,7 @@ public class AuteurViewConsole implements AuteurViewInterface {
 
     public void menu() {
         List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier",  "special" ,"revenir en arrière"));
+
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -71,14 +72,19 @@ public class AuteurViewConsole implements AuteurViewInterface {
     }
 
     private void ajouter() {
-        System.out.println("nom : ");
-        String nom = sc.nextLine();
-        System.out.println("prénom :  ");
-        String prenom = sc.nextLine();
-        System.out.println("nationalité : ");
-        String nationalite = sc.nextLine();
-        Auteur laut = new Auteur(nom, prenom, nationalite);
-        presenter.addAuteur(laut);
+        try {
+            System.out.println("nom : ");
+            String nom = sc.nextLine();
+            System.out.println("prénom :  ");
+            String prenom = sc.nextLine();
+            System.out.println("nationalité : ");
+            String nationalite = sc.nextLine();
+            Auteur laut = new Auteur(nom, prenom, nationalite);
+            presenter.addAuteur(laut);
+        }
+        catch (Exception e ){
+            System.out.println("Une erreure est survenue"+e.getMessage());
+        }
     }
 
     private void retirer() {

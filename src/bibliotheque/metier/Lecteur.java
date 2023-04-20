@@ -13,7 +13,9 @@ public class Lecteur {
 
     private List<Location> lloc=new ArrayList<>();
 
-    public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) {
+    public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel)  throws Exception {
+        if(nom.trim().equals("")||prenom.trim().equals("")||adresse.equals("")||mail.equals("")|| tel.equals("")|| dn.isAfter(LocalDate.now()))throw new
+                Exception("Une des valeures entrées est invalides");
         this.numlecteur = numlecteur;
         this.nom = nom;
         this.prenom = prenom;

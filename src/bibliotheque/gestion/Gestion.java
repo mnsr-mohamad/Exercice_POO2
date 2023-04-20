@@ -19,63 +19,69 @@ public class Gestion {
 
 
     public void populate(){
-        Auteur a = new Auteur("Verne","Jules","France");
-        laut.add(a);
+        try{
+            Auteur a = new Auteur("Verne","Jules","France");
+            laut.add(a);
 
-        Livre l = new Livre("Vingt mille lieues sous les mers",10, LocalDate.of(1880,1,1),1.50,"français","aventure","a125",350,TypeLivre.ROMAN,"histoire de sous-marin");
-        louv.add(l);
+            Livre l = new Livre("Vingt mille lieues sous les mers",10, LocalDate.of(1880,1,1),1.50,"français","aventure","a125",350,TypeLivre.ROMAN,"histoire de sous-marin");
+            louv.add(l);
 
-        a.addOuvrage(l);
+            a.addOuvrage(l);
 
-        a = new Auteur("Spielberg","Steven","USA");
-        laut.add(a);
+            a = new Auteur("Spielberg","Steven","USA");
+            laut.add(a);
 
-        DVD d = new DVD("AI",12,LocalDate.of(2000,10,1),2.50,"anglais","SF",4578l,LocalTime.of(2,0,0),(byte)2);
-        d.getAutresLangues().add("français");
-        d.getAutresLangues().add("italien");
-        d.getSousTitres().add("néerlandais");
-        louv.add(d);
+            DVD d = new DVD("AI",12,LocalDate.of(2000,10,1),2.50,"anglais","SF",4578l,LocalTime.of(2,0,0),(byte)2);
+            d.getAutresLangues().add("français");
+            d.getAutresLangues().add("italien");
+            d.getSousTitres().add("néerlandais");
+            louv.add(d);
 
-        a.addOuvrage(d);
+            a.addOuvrage(d);
 
-         a = new Auteur("Kubrick","Stanley","GB");
-        laut.add(a);
+            a = new Auteur("Kubrick","Stanley","GB");
+            laut.add(a);
 
-        a.addOuvrage(d);
-
-
-        CD c = new CD("The Compil 2023",0,LocalDate.of(2023,1,1),2,"English","POP",1245,(byte)20,LocalTime.of(1,40,0));
-        louv.add(c);
-
-        Rayon r = new Rayon("r12","aventure");
-        lrayon.add(r);
-
-        Exemplaire e = new Exemplaire("m12","état neuf",l);
-        lex.add(e);
-        e.setRayon(r);
+            a.addOuvrage(d);
 
 
-        r = new Rayon("r45","science fiction");
-        lrayon.add(r);
+            CD c = new CD("The Compil 2023",0,LocalDate.of(2023,1,1),2,"English","POP",1245,(byte)20,LocalTime.of(1,40,0));
+            louv.add(c);
 
-        e = new Exemplaire("d12","griffé",d);
-        lex.add(e);
+            Rayon r = new Rayon("r12","aventure");
+            lrayon.add(r);
 
-        e.setRayon(r);
+            Exemplaire e = new Exemplaire("m12","état neuf",l);
+            lex.add(e);
+            e.setRayon(r);
 
 
-        Lecteur lec = new Lecteur(1,"Dupont","Jean",LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
-        llect.add(lec);
+            r = new Rayon("r45","science fiction");
+            lrayon.add(r);
 
-        Location loc = new Location(LocalDate.of(2023,2,1),LocalDate.of(2023,3,1),lec,e);
-        lloc.add(loc);
-        loc.setDateRestitution(LocalDate.of(2023,2,4));
+            e = new Exemplaire("d12","griffé",d);
+            lex.add(e);
 
-        lec = new Lecteur(1,"Durant","Aline",LocalDate.of(1980,10,10),"Binche","aline.durant@mail.com","045874444");
-        llect.add(lec);
+            e.setRayon(r);
 
-        loc = new Location(LocalDate.of(2023,2,5),LocalDate.of(2023,3,5),lec,e);
-        lloc.add(loc);
+
+            Lecteur lec = new Lecteur(1,"Dupont","Jean",LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
+            llect.add(lec);
+
+            Location loc = new Location(LocalDate.of(2023,2,1),LocalDate.of(2023,3,1),lec,e);
+            lloc.add(loc);
+            loc.setDateRestitution(LocalDate.of(2023,2,4));
+
+            lec = new Lecteur(1,"Durant","Aline",LocalDate.of(1980,10,10),"Binche","aline.durant@mail.com","045874444");
+            llect.add(lec);
+
+            loc = new Location(LocalDate.of(2023,2,5),LocalDate.of(2023,3,5),lec,e);
+            lloc.add(loc);
+        }
+        catch(Exception e ){
+            System.out.println("Une erreur est survenue "+e.getMessage());
+        }
+
     }
 
     private void menu() {
@@ -136,28 +142,34 @@ List<Location> lo=new ArrayList<>();
     }
 
     private void gestLecteurs() {
-        System.out.println("numéro");
-        int num=sc.nextInt();
-        sc.skip("\n");
-        System.out.println("nom ");
-        String nom=sc.nextLine();
-        System.out.println("prénom ");
-        String prenom=sc.nextLine();
-        System.out.println("date de naissance");
-        String[] jma = sc.nextLine().split(" ");
-        int j = Integer.parseInt(jma[0]);
-        int m = Integer.parseInt(jma[1]);
-        int a = Integer.parseInt(jma[2]);
-        LocalDate dn= LocalDate.of(a,m,j);
-        System.out.println("adresse");
-        String adr=sc.nextLine();
-        System.out.println("mail");
-        String mail=sc.nextLine();
-        System.out.println("tel ");
-        String tel=sc.nextLine();
-        Lecteur lect = new Lecteur(num,nom,prenom,dn,adr,mail,tel);
-        llect.add(lect);
-        System.out.println("lecteur créé");
+        try{
+            System.out.println("numéro");
+            int num=sc.nextInt();
+            sc.skip("\n");
+            System.out.println("nom ");
+            String nom=sc.nextLine();
+            System.out.println("prénom ");
+            String prenom=sc.nextLine();
+            System.out.println("date de naissance");
+            String[] jma = sc.nextLine().split(" ");
+            int j = Integer.parseInt(jma[0]);
+            int m = Integer.parseInt(jma[1]);
+            int a = Integer.parseInt(jma[2]);
+            LocalDate dn= LocalDate.of(a,m,j);
+            System.out.println("adresse");
+            String adr=sc.nextLine();
+            System.out.println("mail");
+            String mail=sc.nextLine();
+            System.out.println("tel ");
+            String tel=sc.nextLine();
+            Lecteur lect = new Lecteur(num,nom,prenom,dn,adr,mail,tel);
+            llect.add(lect);
+            System.out.println("lecteur créé");
+        }
+        catch(Exception e){
+            System.out.println("Une erreur est survenue "+e.getMessage());
+        }
+
 
     }
 
@@ -291,28 +303,33 @@ List<Location> lo=new ArrayList<>();
     }
 
        private void gestAuteurs() {
-        System.out.println("nom ");
-        String nom=sc.nextLine();
-        System.out.println("prénom ");
-        String prenom=sc.nextLine();
-        System.out.println("nationalité");
-        String nat=sc.nextLine();
-        Auteur a  = new Auteur(nom,prenom,nat);
-        laut.add(a);
-        System.out.println("écrivain créé");
-        //TODO attribuer ouvrages , les ouvrages sont triés par ordre de titre
+        try{
+            System.out.println("nom ");
+            String nom=sc.nextLine();
+            System.out.println("prénom ");
+            String prenom=sc.nextLine();
+            System.out.println("nationalité");
+            String nat=sc.nextLine();
+            Auteur a  = new Auteur(nom,prenom,nat);
+            laut.add(a);
+            System.out.println("écrivain créé");
+            //TODO attribuer ouvrages , les ouvrages sont triés par ordre de titre
 
-           Collections.sort(louv);
+            Collections.sort(louv);
 
 
-           int choix = Utilitaire.choixListe(louv);
-           Ouvrage ouvrageChoisi = louv.get(choix-1);
-           ouvrageChoisi.addAuteur(a);
+            int choix = Utilitaire.choixListe(louv);
+            Ouvrage ouvrageChoisi = louv.get(choix-1);
+            ouvrageChoisi.addAuteur(a);
 
-           System.out.println("Liste des auteurs avec ouvrages : ");
-           for (int i = 0; i < laut.size(); i++) {
-               System.out.println((i + 1) + ". " + laut.get(i));
-           }
+            System.out.println("Liste des auteurs avec ouvrages : ");
+            for (int i = 0; i < laut.size(); i++) {
+                System.out.println((i + 1) + ". " + laut.get(i));
+            }
+        }
+        catch (Exception e ){
+            System.out.println("Une erreur est survenue "+e.getMessage());
+        }
 
     }
 

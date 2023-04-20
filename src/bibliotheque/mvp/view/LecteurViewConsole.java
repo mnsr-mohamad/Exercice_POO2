@@ -105,24 +105,32 @@ public class LecteurViewConsole implements LecteurViewInterface {
         presenter.search(idLecteur);
     }
     private void ajouter() {
-        System.out.println("nom ");
-        String nom = sc.nextLine();
-        System.out.println("prénom ");
-        String prenom = sc.nextLine();
-        System.out.println("date de naissance");
-        String[] jma = sc.nextLine().split(" ");
-        int j = Integer.parseInt(jma[0]);
-        int m = Integer.parseInt(jma[1]);
-        int a = Integer.parseInt(jma[2]);
-        LocalDate dn = LocalDate.of(a, m, j);
-        System.out.println("adresse");
-        String adr = sc.nextLine();
-        System.out.println("mail");
-        String mail = sc.nextLine();
-        System.out.println("tel ");
-        String tel = sc.nextLine();
-        Lecteur lec = new Lecteur(0, nom, prenom, dn, adr, mail, tel);
-        presenter.addLecteur(lec);
+
+       try
+       {
+           System.out.println("nom ");
+           String nom = sc.nextLine();
+           System.out.println("prénom ");
+           String prenom = sc.nextLine();
+           System.out.println("date de naissance");
+           String[] jma = sc.nextLine().split(" ");
+           int j = Integer.parseInt(jma[0]);
+           int m = Integer.parseInt(jma[1]);
+           int a = Integer.parseInt(jma[2]);
+           LocalDate dn = LocalDate.of(a, m, j);
+           System.out.println("adresse");
+           String adr = sc.nextLine();
+           System.out.println("mail");
+           String mail = sc.nextLine();
+           System.out.println("tel ");
+           String tel = sc.nextLine();
+           Lecteur lec = new Lecteur(0, nom, prenom, dn, adr, mail, tel);
+           presenter.addLecteur(lec);
+       }
+       catch (Exception e ){
+           System.out.println("Une erreu est survenue "+e.getMessage());
+       }
+
     }
 
     public void opModification(Lecteur lecteur) {

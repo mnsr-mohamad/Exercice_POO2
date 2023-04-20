@@ -21,6 +21,7 @@ public class Utilitaire {
 
     public static int choixElt(List l){
         int choix;
+
         do {
             System.out.println("choix :");
             choix = sc.nextInt();

@@ -34,10 +34,17 @@ public class AuteurModel implements DAOAuteur,SpecialAuteur {
 
     @Override
     public Auteur modifierAuteur(Auteur laut) {
-        boolean present = auteurs.contains(laut.getNom()) && auteurs.contains(laut.getPrenom());
+       /* boolean present = auteurs.contains(laut.getNom()) && auteurs.contains(laut.getPrenom());
         if (!present) {
             return laut;
-        } else return null;
+        } else return null;*/
+
+        int p = auteurs.indexOf(laut);
+        if (p<0) {
+            return null;
+        }
+        auteurs.set(p,laut);
+        return laut;
     }
 
     public List<Ouvrage> lOuvrage(Auteur a) {
