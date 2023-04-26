@@ -99,12 +99,17 @@ public class RayonViewConsole implements RayonViewInterface {
 
 
     private void ajouter() {
-        System.out.println("code :  ");
-        String code = sc.nextLine();
-        System.out.println("genre :  ");
-        String genre = sc.nextLine();
-        Rayon lr = new Rayon(code, genre);
-        presenter.addRayon(lr);
+        try{
+            System.out.println("code :  ");
+            String code = sc.nextLine();
+            System.out.println("genre :  ");
+            String genre = sc.nextLine();
+            Rayon lr = new Rayon(code, genre);
+            presenter.addRayon(lr);
+        }
+        catch(Exception e ){
+            System.out.println("Erreur "+e.getMessage());
+        }
     }
 
     public void opModification(Rayon rayon) {

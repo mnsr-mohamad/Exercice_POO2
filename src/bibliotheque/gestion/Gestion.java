@@ -174,46 +174,58 @@ List<Location> lo=new ArrayList<>();
     }
 
     private void gestRayons() {
-        System.out.println("code ");
-        String code=sc.next();
-        System.out.println("genre ");
-        String genre=sc.next();
-        Rayon r = new Rayon(code,genre);
-        lrayon.add(r);
-        System.out.println("rayon créé");
+        try{
+            System.out.println("code ");
+            String code=sc.next();
+            System.out.println("genre ");
+            String genre=sc.next();
+            Rayon r = new Rayon(code,genre);
+            lrayon.add(r);
+            System.out.println("rayon créé");
+        }
+        catch(Exception e){
+            System.out.println("Erreur"+e.getMessage());
+        }
+
 
         //TODO attribuer exemplaire, les exemplaires sont triés par ordre de titre de l'ouvrage , empêcher doublons sur l'exemplaire
     }
 
     private void gestExemplaires() {
-        System.out.println("matricule ");
-        String mat=sc.next();
-        System.out.println("etat  ");
-        String etat=sc.next();
+        try{
+            System.out.println("matricule ");
+            String mat=sc.next();
+            System.out.println("etat  ");
+            String etat=sc.next();
 
-        System.out.println("ouvrage ");
-        int choix = Utilitaire.choixListe(louv);
-        Exemplaire ex = new Exemplaire(mat,etat,louv.get(choix-1));
-        lex.add(ex);
-        System.out.println("exemplaire créé");
-        //TODO attribuer rayon , les rayons sont triès par ordre de code
+            System.out.println("ouvrage ");
+            int choix = Utilitaire.choixListe(louv);
+            Exemplaire ex = new Exemplaire(mat,etat,louv.get(choix-1));
+            lex.add(ex);
+            System.out.println("exemplaire créé");
+            //TODO attribuer rayon , les rayons sont triès par ordre de code
 
-        Collections.sort(lrayon);
+            Collections.sort(lrayon);
 
-        System.out.println("Liste des rayons :");
-        for (int i = 0; i < lrayon.size(); i++) {
-            System.out.println((i + 1) + ". " + lrayon.get(i));
+            System.out.println("Liste des rayons :");
+            for (int i = 0; i < lrayon.size(); i++) {
+                System.out.println((i + 1) + ". " + lrayon.get(i));
+            }
+            System.out.println("Veuillez choisir le numéro du rayon :");//va créer une copie de la liste lrayon et la trier par ordre de code. Vous pouvez ensuite utiliser cette liste pour afficher les rayons et permettre à l'utilisateur de choisir un rayon.
+            int choixRayon = sc.nextInt();
+            Rayon rayonChoisi = lrayon.get(choixRayon - 1);
+            rayonChoisi.addExemplaire(ex);
+
+            System.out.println("Liste des exemplaire déjà existant : ");
+            sc.skip("\n");
+            for (int i = 0; i < lex.size(); i++) {
+                System.out.println((i + 1) + ". " + lex.get(i));
+            }
         }
-        System.out.println("Veuillez choisir le numéro du rayon :");//va créer une copie de la liste lrayon et la trier par ordre de code. Vous pouvez ensuite utiliser cette liste pour afficher les rayons et permettre à l'utilisateur de choisir un rayon.
-        int choixRayon = sc.nextInt();
-        Rayon rayonChoisi = lrayon.get(choixRayon - 1);
-        rayonChoisi.addExemplaire(ex);
-
-        System.out.println("Liste des exemplaire déjà existant : ");
-        sc.skip("\n");
-        for (int i = 0; i < lex.size(); i++) {
-            System.out.println((i + 1) + ". " + lex.get(i));
+        catch(Exception e ){
+            System.out.println("Erreur "+e.getMessage());
         }
+
     }
 
     private void gestOuvrages() {

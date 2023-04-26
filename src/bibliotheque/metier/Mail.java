@@ -5,7 +5,9 @@ public class Mail {
     private String message;
     private String dateEnvoi;
 
-    public Mail(String objet, String message, String dateEnvoi) {
+    public Mail(String objet, String message, String dateEnvoi) throws Exception {
+        if(objet.trim().equals("")||message.trim().equals("")|| dateEnvoi.trim().equals(""))throw new
+                Exception("Une des valeures entrées est invalides");
         this.objet = objet;
         this.message = message;
         this.dateEnvoi = dateEnvoi;

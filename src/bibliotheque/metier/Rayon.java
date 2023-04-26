@@ -1,5 +1,6 @@
 package bibliotheque.metier;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Rayon implements Comparable{
@@ -7,7 +8,9 @@ public class Rayon implements Comparable{
     private String genre;
     private List<Exemplaire> lex = new ArrayList<>();
 
-    public Rayon(String codeRayon, String genre) {
+    public Rayon(String codeRayon, String genre)throws Exception {
+        if(codeRayon.trim().equals("")||genre.trim().equals(""))throw new
+                Exception("Une des valeures entrées est invalides");
         this.codeRayon = codeRayon;
         this.genre = genre;
     }

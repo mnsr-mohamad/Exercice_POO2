@@ -20,7 +20,10 @@ public class Exemplaire {
     private List<Location> lloc= new ArrayList<>();
 
 
-    public Exemplaire(String matricule, String descriptionEtat,Ouvrage ouvrage){
+    public Exemplaire(String matricule, String descriptionEtat,Ouvrage ouvrage) throws Exception{
+        if (matricule.trim().equals("") || descriptionEtat.trim().equals("")  ||ouvrage == null) {
+            throw new Exception("Un ou plusieurs paramètres sont invalides");
+        }
         this.matricule = matricule;
         this.descriptionEtat=descriptionEtat;
         this.ouvrage = ouvrage;

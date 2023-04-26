@@ -21,11 +21,14 @@ public class Utilitaire {
 
     public static int choixElt(List l){
         int choix;
-
         do {
-            System.out.println("choix :");
-            choix = sc.nextInt();
-            sc.skip("\n");
+            System.out.println("Choix :");
+            try {
+                choix = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur,entrez un nombre valide .");
+                choix = -1;
+            }
         } while(choix <1 || choix > l.size());
         return choix;
     }

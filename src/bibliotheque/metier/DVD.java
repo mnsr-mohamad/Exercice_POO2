@@ -13,8 +13,11 @@ public class DVD extends Ouvrage{
     private byte nbreBonus;
     private List<String> autresLangues=new ArrayList<>();
     private List<String> sousTitres=new ArrayList<>();
-    public DVD(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre, long code, LocalTime dureeTotale, byte nbreBonus) {
+    public DVD(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre, long code, LocalTime dureeTotale, byte nbreBonus)throws  Exception {
         super(titre, ageMin, dateParution, TypeOuvrage.DVD, prixLocation, langue, genre);
+        if (code <= 0 || dureeTotale.getMinute() <= 0 || nbreBonus <= 0) {
+            throw new Exception("Un ou plusieurs paramètres sont invalides");
+        }
         this.code=code;
        this.dureeTotale=dureeTotale;
        this.nbreBonus=nbreBonus;
