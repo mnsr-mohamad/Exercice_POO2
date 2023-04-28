@@ -1,62 +1,33 @@
 package bibliotheque.mvp.presenter;
 
-import bibliotheque.metier.Auteur;
-import bibliotheque.metier.Exemplaire;
-import bibliotheque.metier.Lecteur;
-import bibliotheque.metier.Ouvrage;
-import bibliotheque.mvp.model.DAOAuteur;
+import bibliotheque.metier.*;
+import bibliotheque.mvp.model.DAO;
 import bibliotheque.mvp.model.SpecialAuteur;
-import bibliotheque.mvp.model.SpecialLecteur;
-import bibliotheque.mvp.view.AuteurViewInterface;
+import bibliotheque.mvp.view.ViewInterface;
 
-import java.util.List;
 
-public class AuteurPresenter {
-    private DAOAuteur model;
-    private AuteurViewInterface view;
 
-    public AuteurPresenter(DAOAuteur model, AuteurViewInterface view) {
-        this.model = model;
-        this.view = view;
-        this.view.setPresenter(this);
+public class AuteurPresenter extends Presenter<Auteur> implements SpecialAuteurPresenter {
+
+
+    public AuteurPresenter(DAO<Auteur> model, ViewInterface<Auteur> view) {
+        super(model, view);
     }
+    @Override
+    public void  listerOuvrages(Auteur a) {
 
-    public void start() {
-        List<Auteur> auteurs = model.getAuteurs();
-        view.setListDatas(auteurs);
-    }
-
-    public void addAuteur(Auteur auteur) {
-        Auteur laut = model.addAuteur(auteur);
-        if(laut!=null) view.affMsg("création de :"+laut);
-        else view.affMsg("erreur de création");
-        List<Auteur> auteurs = model.getAuteurs();
-        view.setListDatas(auteurs);
+        view.affList (((SpecialAuteur)model).listerOuvrages(a));
     }
 
 
-    public void removeAuteur(Auteur auteur) {
-        boolean ok = model.removeAuteur(auteur);
-        if (ok) view.affMsg("auteur effacé");
-        else view.affMsg("auteur non effacé");
-        List<Auteur> auteurs = model.getAuteurs();
-        view.setListDatas(auteurs);
-    }
-        public void modifierAuteur(Auteur auteur){
+    @Override
+    public void listerLivre(Auteur a, TypeLivre tl) {
 
-            Auteur laut=model.modifierAuteur(auteur);
-            if(laut!=null) view.affMsg("Modification de : "+laut);
-            else view.affMsg("erreur de modification");
-            List<Auteur> auteurs = model.getAuteurs();
-            view.setListDatas(auteurs);
+        view.affList (((SpecialAuteur)model).listerLivre(a,tl));
     }
 
-    public void lOuvrage(Auteur a) {
-        List<Ouvrage> lex =  ((SpecialAuteur)model).lOuvrage(a);
-        if(lex==null || lex.isEmpty()) view.affMsg("aucun ouvrage trouvé");
-        else view.affList(lex);
+    @Override
+    public void listerOuvrages(Auteur a, String genre) {
+        view.affList (((SpecialAuteur)model).listerOuvrages(a,genre));
     }
-   //finir auteur
-
-
 }

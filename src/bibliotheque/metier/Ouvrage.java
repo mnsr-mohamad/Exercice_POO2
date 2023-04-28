@@ -1,10 +1,12 @@
 package bibliotheque.metier;
 
+
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Ouvrage implements Comparable {
+public abstract class Ouvrage {
     protected String titre;
     protected int ageMin;
     protected LocalDate dateParution;
@@ -13,14 +15,12 @@ public abstract class Ouvrage implements Comparable {
     protected String langue;
     protected String genre;
 
-    protected List<Auteur> lauteurs = new ArrayList<>();
+    protected List<Auteur> lauteurs=new ArrayList<>();
     protected List<Exemplaire> lex = new ArrayList<>();
 
 
-    public Ouvrage(String titre, int ageMin, LocalDate dateParution, TypeOuvrage to, double prixLocation, String langue, String genre) throws Exception {
-        if (titre.trim().equals("") || ageMin <= 0  ||dateParution.isAfter(LocalDate.now())||  prixLocation <= 0  ||langue.trim().equals("") || genre.trim().equals("")) {
-            throw new Exception("Un ou plusieurs paramètres sont invalides");
-        }
+    public Ouvrage(String titre, int ageMin, LocalDate dateParution, TypeOuvrage to, double prixLocation, String langue, String genre)throws Exception {
+       if(titre==null || titre.trim().equals("")) throw new Exception("titre invalide");
         this.titre = titre;
         this.ageMin = ageMin;
         this.dateParution = dateParution;
@@ -119,42 +119,31 @@ public abstract class Ouvrage implements Comparable {
                 ", genre='" + genre + '\'' +
                 '}';
     }
-
-
-    @Override
-    public int compareTo(Object o) {
-
-        return Integer.parseInt(String.valueOf(this.titre.compareTo(((Ouvrage) o).titre)));
-    }
-
-    public void addAuteur(Auteur a) {
+    public void addAuteur(Auteur a ){
         lauteurs.add(a);
         a.getLouvrage().add(this);
     }
 
-    public void remove(Auteur a) {
+    public void remove(Auteur a){
         lauteurs.remove(a);
         a.getLouvrage().remove(this);
     }
-
-    public void addExemplaire(Exemplaire e) {
-        lex.add(e);
+    public void addExemplaire(Exemplaire e){
         e.setOuvrage(this);
     }
 
-    public void remove(Exemplaire e) {
+    public void remove(Exemplaire e){
         lex.remove(e);
         e.setOuvrage(null);
     }
-
-    public List<Exemplaire> listerExemplaires() {
+    public List<Exemplaire>listerExemplaires(){
         return lex;
     }
 
-    public List<Exemplaire> listerExemplaires(boolean enLocation) {
+    public List<Exemplaire>listerExemplaires(boolean enLocation){
         List<Exemplaire> lex2 = new ArrayList<>();
-        for (Exemplaire ex : lex) {
-            if (ex.enLocation() == enLocation) lex2.add(ex);
+        for(Exemplaire ex : lex){
+            if(ex.enLocation()==enLocation) lex2.add(ex);
         }
         return lex2;
     }
