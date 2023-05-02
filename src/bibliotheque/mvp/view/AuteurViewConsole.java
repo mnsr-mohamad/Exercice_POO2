@@ -1,18 +1,24 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.Comparator.AuteurComparator;
 import bibliotheque.metier.*;
 import bibliotheque.mvp.presenter.AuteurPresenter;
 import bibliotheque.mvp.presenter.LecteurPresenter;
 import bibliotheque.mvp.presenter.SpecialAuteurPresenter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static bibliotheque.utilitaires.Utilitaire.*;
 
 
 public class AuteurViewConsole extends AbstractViewConsole<Auteur> implements SpecialAuteurViewConsole {
+
+   @Override
+    public void setListDatas(List<Auteur> ldatas) {
+        Collections.sort(ldatas, new AuteurComparator());
+        super.setListDatas(ldatas);
+    }
+
     @Override
     protected void rechercher() {
         try {
@@ -117,6 +123,7 @@ public class AuteurViewConsole extends AbstractViewConsole<Auteur> implements Sp
         TypeLivre tl = tlv[ch2-1];
         ((SpecialAuteurPresenter)presenter).listerLivre(a,tl);
     }
+
 
 
 }

@@ -1,5 +1,8 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.Comparator.AuteurComparator;
+import bibliotheque.Comparator.RayonComparator;
+import bibliotheque.metier.Auteur;
 import bibliotheque.metier.Ouvrage;
 import bibliotheque.metier.Rayon;
 import bibliotheque.mvp.presenter.OuvragePresenter;
@@ -9,11 +12,18 @@ import bibliotheque.mvp.presenter.SpecialRayonPresenter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static bibliotheque.utilitaires.Utilitaire.*;
 
 public class RayonViewConsole extends AbstractViewConsole<Rayon> implements SpecialRayonViewConsole {
+    @Override
+    public void setListDatas(List<Rayon> ldatas) {
+        Collections.sort(ldatas, new RayonComparator());
+        super.setListDatas(ldatas);
+    }
+
     @Override
     protected void rechercher() {
       System.out.println("code du rayon : ");

@@ -15,4 +15,6 @@ public interface ViewInterface<T> {
     public void affList(List l);
 
     public T selectionner(List<T> l);
+
+
 }

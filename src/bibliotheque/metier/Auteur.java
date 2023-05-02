@@ -1,12 +1,13 @@
 package bibliotheque.metier;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import static bibliotheque.metier.TypeOuvrage.*;
 
 
-public class Auteur  {
+public class Auteur implements Comparator<Auteur> {
 
     private  String nom,prenom;
     private String nationalite;
@@ -52,6 +53,15 @@ public class Auteur  {
     }
 
 
+    @Override
+    public int compare(Auteur a1, Auteur a2) {
+        int nomComparison = a1.getNom().compareTo(a2.getNom());
+        if (nomComparison != 0) {
+            return nomComparison;
+        }
+
+        return a1.getPrenom().compareTo(a2.getPrenom());
+    }
 
     @Override
     public boolean equals(Object o) {

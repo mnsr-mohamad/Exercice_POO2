@@ -4,7 +4,7 @@ package bibliotheque.metier;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Lecteur   {
+public class Lecteur  implements Comparator<Lecteur> {
     private int numlecteur;
     private  String nom,prenom;
     private LocalDate dn;
@@ -102,6 +102,8 @@ if(nom==null || prenom==null ||nom.trim().equals("")||prenom.trim().equals("")) 
                 '}';
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -129,6 +131,16 @@ if(nom==null || prenom==null ||nom.trim().equals("")||prenom.trim().equals("")) 
             stex.add(loc.getExemplaire());
         }
        return stex;
+    }
+
+    @Override
+    public int compare(Lecteur l1, Lecteur l2) {
+        int nomComparison = l1.getNom().compareTo(l2.getNom());
+        if (nomComparison != 0) {
+            return nomComparison;
+        }
+
+        return l1.getPrenom().compareTo(l2.getPrenom());
     }
 
 }

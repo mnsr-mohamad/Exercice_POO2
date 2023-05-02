@@ -76,6 +76,7 @@
             T elt = l.get(nl - 1);
             return elt;
         }
+
         protected abstract void rechercher();
 
         protected  abstract void modifier();
