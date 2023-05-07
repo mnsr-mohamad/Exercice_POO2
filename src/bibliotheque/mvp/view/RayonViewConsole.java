@@ -20,8 +20,12 @@ import static bibliotheque.utilitaires.Utilitaire.*;
 public class RayonViewConsole extends AbstractViewConsole<Rayon> implements SpecialRayonViewConsole {
     @Override
     public void setListDatas(List<Rayon> ldatas) {
-        Collections.sort(ldatas, new RayonComparator());
+        /*Collections.sort(ldatas, new RayonComparator());
+        super.setListDatas(ldatas);*/
+
+        Collections.sort(ldatas, (o1, o2) -> o1.getGenre().compareTo(o2.getGenre()) );
         super.setListDatas(ldatas);
+
     }
 
     @Override

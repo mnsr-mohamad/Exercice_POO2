@@ -9,10 +9,7 @@ import bibliotheque.mvp.presenter.ExemplairePresenter;
 import bibliotheque.mvp.presenter.SpecialExemplairePresenter;
 import bibliotheque.utilitaires.Utilitaire;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static bibliotheque.utilitaires.Utilitaire.*;
 import static bibliotheque.utilitaires.Utilitaire.modifyIfNotBlank;
@@ -21,8 +18,16 @@ public class ExemplaireViewConsole extends AbstractViewConsole<Exemplaire> imple
 
     @Override
    public void setListDatas(List<Exemplaire> ldatas) {
-        Collections.sort(ldatas, new ExemplaireComparator());
+        /*Collections.sort(ldatas, new ExemplaireComparator());
+        super.setListDatas(ldatas);*/
+        Collections.sort(ldatas, (o1, o2) -> o1.getMatricule().compareTo(o2.getMatricule()) );
         super.setListDatas(ldatas);
+
+
+
+       /*Comparator<Exemplaire> cmp= (a1, a2)-> a1.getMatricule().compareTo(a2.getMatricule());
+        ldatas.sort(cmp);
+        super.setListDatas(ldatas);*/
     }
 
     @Override

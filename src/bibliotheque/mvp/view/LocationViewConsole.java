@@ -39,46 +39,19 @@ public class LocationViewConsole extends AbstractViewConsole<Location> implement
 
     @Override
     protected void ajouter() {
-        Lecteur l = ((LocationPresenter) presenter).choixLecteur();
-        Exemplaire ex = null;
-        boolean exemplaireDisponible = false;
-
-        while (!exemplaireDisponible) {
-            ex = ((LocationPresenter) presenter).choixExemplaire();
-
-            boolean exemplairePris = false;
-            for (Location loc : ldatas) {
-                if (loc.getExemplaire().equals(ex)) {
-                    System.out.println("Exemplaire déjà pris, veuillez choisir un autre exemplaire.");
-                    exemplairePris = true;
-                    break;
-                }
-            }
-
-            if (!exemplairePris) {
-                exemplaireDisponible = true;
-            }
+        Lecteur l =((LocationPresenter)presenter).choixLecteur();
+        Exemplaire ex = ((LocationPresenter)presenter).choixExemplaire();
+        if(ex.enLocation()) {
+            affMsg("exemplaire en location");
+            return;
         }
-
-        Location loc = new Location(l, ex);
+        Location loc = new Location(l,ex);
         presenter.add(loc);
-       /* boolean ok = true;
-        Lecteur l = ((LocationPresenter) presenter).choixLecteur();
-        Exemplaire ex = ((LocationPresenter) presenter).choixExemplaire();
-        ok=ex.enLocation();
-        if(ok){
-            System.out.println("Exemplaire deja prit");
-        }
-        Location loc= new Location(l, ex);
-        presenter.add(loc);*/
-
-
-
     }
 
     @Override
     protected void special() {
-        /*int choix =  choixElt(ldatas);
+        int choix =  choixElt(ldatas);
         Location l = ldatas.get(choix-1);
 
         List options = new ArrayList<>(Arrays.asList("calculer amende","enregistrer retour","fin"));
@@ -96,31 +69,8 @@ public class LocationViewConsole extends AbstractViewConsole<Location> implement
                 case 3 :return;
             }
         } while (true);
-*/List<Location> locationsEnCours = new ArrayList<>();
-        for (Location loc : ldatas) {
-            if (loc.getDateRestitution() == null) {
-                locationsEnCours.add(loc);
-            }
-        }
-        int choix =  choixElt(locationsEnCours);
-        Location l = locationsEnCours.get(choix-1);
-
-        List options = new ArrayList<>(Arrays.asList("calculer amende","enregistrer retour","fin"));
-        do {
-            int ch = choixListe(options);
-
-            switch (ch) {
-
-                case 1:
-                    amende(l);
-                    break;
-                case 2:
-                    retour(l);
-                    break;
-                case 3 :return;
-            }
-        } while (true);
     }
+
 
     @Override
     public void retour(Location l) {

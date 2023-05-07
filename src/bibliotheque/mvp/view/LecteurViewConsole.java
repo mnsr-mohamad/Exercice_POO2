@@ -8,6 +8,8 @@ import bibliotheque.metier.Lecteur;
 
 
 import bibliotheque.mvp.presenter.LecteurPresenter;
+import bibliotheque.mvp.presenter.SpecialLecteurPresenter;
+
 import static bibliotheque.utilitaires.Utilitaire.*;
 
 import java.time.LocalDate;
@@ -15,11 +17,15 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class LecteurViewConsole extends AbstractViewConsole<Lecteur> {
+public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements SpecialLecteurViewConsole {
     @Override
     public void setListDatas(List<Lecteur> ldatas) {
-        Collections.sort(ldatas, new LecteurComparator());
-        super.setListDatas(ldatas);
+        /*Collections.sort(ldatas, new LecteurComparator());
+        super.setListDatas(ldatas);*/
+        Collections.sort(ldatas, (o1, o2) -> {
+            if(o1.getNom().compareTo(o2.getNom())!=0) return (o1.getNom().compareTo(o2.getNom()));
+            return o1.getPrenom().compareTo(o2.getPrenom());
+        });
     }
 
   protected  void rechercher() {
@@ -118,6 +124,24 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> {
 
 
         }
+
+    @Override
+    public void exemplairesLoues(Lecteur lec) {
+        ((SpecialLecteurPresenter)presenter).exemplairesLoues(lec);
+    }
+
+    @Override
+    public void exemplairesLocation(Lecteur lec) {
+        ((SpecialLecteurPresenter)presenter).exemplairesEnLocation(lec);
+    }
+
+
+    @Override
+    public void lecParMail() {
+        System.out.print("mail recherché : ");
+        String mail= sc.next();
+        ((SpecialLecteurPresenter)presenter).lecParMail(mail);
+    }
     }
 
 

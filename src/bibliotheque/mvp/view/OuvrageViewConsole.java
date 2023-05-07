@@ -17,8 +17,13 @@ public class OuvrageViewConsole extends AbstractViewConsole<Ouvrage> implements 
 
     @Override
     public void setListDatas(List<Ouvrage> ldatas) {
-        Collections.sort(ldatas, new OuvrageComparator());
+       /* Collections.sort(ldatas, new OuvrageComparator());
+        super.setListDatas(ldatas);*/
+
+        Collections.sort(ldatas, (o1, o2) -> o1.getTitre().compareTo(o2.getTitre()) );
         super.setListDatas(ldatas);
+
+
     }
 
     @Override

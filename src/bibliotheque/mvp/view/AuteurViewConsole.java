@@ -15,8 +15,20 @@ public class AuteurViewConsole extends AbstractViewConsole<Auteur> implements Sp
 
    @Override
     public void setListDatas(List<Auteur> ldatas) {
-        Collections.sort(ldatas, new AuteurComparator());
-        super.setListDatas(ldatas);
+       /* Collections.sort(ldatas, new AuteurComparator());
+        super.setListDatas(ldatas);*/
+
+       Collections.sort(ldatas, (o1, o2) -> { // -> Lambda expression
+           if(o1.getNom().compareTo(o2.getNom())!=0) return (o1.getNom().compareTo(o2.getNom()));
+           return o1.getPrenom().compareTo(o2.getPrenom());
+       });
+
+
+       //methode lambda pour comparer plusieurs critères
+       Comparator<Auteur> cmp= (a1,a2)-> a1.getNom().compareTo(a2.getNom());
+       cmp =cmp.thenComparing((a1,a2)->a1.getPrenom().compareTo(a2.getPrenom()));
+       ldatas.sort(cmp);
+       super.setListDatas(ldatas);
     }
 
     @Override
