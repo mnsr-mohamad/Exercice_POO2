@@ -10,22 +10,26 @@ import bibliotheque.mvp.presenter.RayonPresenter;
 import bibliotheque.mvp.presenter.SpecialRayonPresenter;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static bibliotheque.utilitaires.Utilitaire.*;
 
 public class RayonViewConsole extends AbstractViewConsole<Rayon> implements SpecialRayonViewConsole {
-    @Override
+  /*  @Override
     public void setListDatas(List<Rayon> ldatas) {
-        /*Collections.sort(ldatas, new RayonComparator());
-        super.setListDatas(ldatas);*/
+        Collections.sort(ldatas, new RayonComparator());
+        super.setListDatas(ldatas);
 
         Collections.sort(ldatas, (o1, o2) -> o1.getGenre().compareTo(o2.getGenre()) );
         super.setListDatas(ldatas);
 
+    }*/
+
+    @Override
+    public void setListDatas(List<Rayon> ldatas, Comparator<Rayon> cmp) {
+        cmp=(o1, o2) -> o1.getGenre().compareToIgnoreCase(o2.getGenre());
+
+        super.setListDatas(ldatas, cmp);
     }
 
     @Override

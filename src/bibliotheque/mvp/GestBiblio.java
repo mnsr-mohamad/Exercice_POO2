@@ -125,6 +125,10 @@
             om.add(l);
             am.getAll().get(0).addOuvrage(l);
 
+            Livre l2 = new Livre("Tintin",15, LocalDate.of(1870,1,1),1.50,"français","aventure","a1658",350, TypeLivre.DOCUMENTAIRE,"histoire de tintin");
+            om.add(l2);
+            am.getAll().get(1).addOuvrage(l2);
+
             DVD d = new DVD("AI",12,LocalDate.of(2000,10,1),2.50,"anglais","SF",4578l, LocalTime.of(2,0,0),(byte)2);
             d.getAutresLangues().add("français");
             d.getAutresLangues().add("italien");

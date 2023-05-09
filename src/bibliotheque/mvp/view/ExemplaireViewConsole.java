@@ -16,10 +16,10 @@ import static bibliotheque.utilitaires.Utilitaire.modifyIfNotBlank;
 
 public class ExemplaireViewConsole extends AbstractViewConsole<Exemplaire> implements SpecialExemplaireViewConsole {
 
-    @Override
+    /*@Override
    public void setListDatas(List<Exemplaire> ldatas) {
-        /*Collections.sort(ldatas, new ExemplaireComparator());
-        super.setListDatas(ldatas);*/
+        Collections.sort(ldatas, new ExemplaireComparator());
+        super.setListDatas(ldatas);
         Collections.sort(ldatas, (o1, o2) -> o1.getMatricule().compareTo(o2.getMatricule()) );
         super.setListDatas(ldatas);
 
@@ -27,7 +27,15 @@ public class ExemplaireViewConsole extends AbstractViewConsole<Exemplaire> imple
 
        /*Comparator<Exemplaire> cmp= (a1, a2)-> a1.getMatricule().compareTo(a2.getMatricule());
         ldatas.sort(cmp);
-        super.setListDatas(ldatas);*/
+        super.setListDatas(ldatas);
+    }*/
+
+    @Override
+    public void setListDatas(List<Exemplaire> ldatas, Comparator<Exemplaire> cmp) {
+
+        cmp= (a1, a2)-> a1.getMatricule().compareTo(a2.getMatricule());
+
+        super.setListDatas(ldatas, cmp);
     }
 
     @Override

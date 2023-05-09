@@ -14,19 +14,31 @@ import static bibliotheque.utilitaires.Utilitaire.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements SpecialLecteurViewConsole {
-    @Override
+   /* @Override
     public void setListDatas(List<Lecteur> ldatas) {
-        /*Collections.sort(ldatas, new LecteurComparator());
-        super.setListDatas(ldatas);*/
+        Collections.sort(ldatas, new LecteurComparator());
+        super.setListDatas(ldatas);
+
+
         Collections.sort(ldatas, (o1, o2) -> {
             if(o1.getNom().compareTo(o2.getNom())!=0) return (o1.getNom().compareTo(o2.getNom()));
             return o1.getPrenom().compareTo(o2.getPrenom());
         });
-    }
+    }*/
+   @Override
+   public void setListDatas(List<Lecteur> ldatas, Comparator<Lecteur> cmp) {
+
+       cmp= (a1,a2)-> a1.getNom().compareTo(a2.getNom());
+       cmp =cmp.thenComparing((a1,a2)->a1.getPrenom().compareTo(a2.getPrenom()));
+
+       super.setListDatas(ldatas, cmp);
+   }
+
 
   protected  void rechercher() {
         System.out.println("numLecteur : ");
@@ -64,6 +76,8 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements 
         ldatas=presenter.getAll();//rafraichissement
         affListe(ldatas);
     }
+
+
 
     protected  void retirer() {
         int choix = choixElt(ldatas);

@@ -109,19 +109,12 @@ public class Auteur implements Comparator<Auteur> {
     }
     public List<Livre> listerLivres(TypeLivre tl){
         List<Livre>ll = new ArrayList<>();
-        for(Ouvrage o : louvrage){
-            if(o.getTo().equals(LIVRE)) {
-                Livre l = (Livre)o;
-                if(l.getTl().equals(tl)) ll.add(l);
-            }
-        }
+        louvrage.stream().filter(o->o.getTo().equals(LIVRE)).map(o->(Livre)o).filter(o->o.getTl().equals(tl)).forEach(o->ll.add(o));
         return ll;
     }
     public List<Ouvrage> listerOuvrages(String genre){
         List<Ouvrage> lot = new ArrayList<>();
-        for(Ouvrage o : louvrage){
-            if(o.getGenre().equals(genre)) lot.add(o);
-        }
+        louvrage.stream().filter(o->o.getGenre().equals(genre)).forEach(o->lot.add(o));
         return lot;
     }
 

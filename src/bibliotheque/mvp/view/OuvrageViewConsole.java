@@ -15,15 +15,23 @@ import static bibliotheque.utilitaires.Utilitaire.modifyIfNotBlank;
 
 public class OuvrageViewConsole extends AbstractViewConsole<Ouvrage> implements SpecialOuvrageViewConsole {
 
-    @Override
+   /* @Override
     public void setListDatas(List<Ouvrage> ldatas) {
-       /* Collections.sort(ldatas, new OuvrageComparator());
-        super.setListDatas(ldatas);*/
+        Collections.sort(ldatas, new OuvrageComparator());
+        super.setListDatas(ldatas);
 
         Collections.sort(ldatas, (o1, o2) -> o1.getTitre().compareTo(o2.getTitre()) );
         super.setListDatas(ldatas);
 
 
+    }*/
+
+
+    @Override
+    public void setListDatas(List<Ouvrage> ldatas, Comparator<Ouvrage> cmp) {
+       cmp=(o1, o2) -> o1.getTitre().compareTo(o2.getTitre());
+
+        super.setListDatas(ldatas, cmp);
     }
 
     @Override
