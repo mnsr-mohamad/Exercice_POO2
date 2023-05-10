@@ -1,9 +1,8 @@
 package bibliotheque.mvp.model;
 
-import bibliotheque.metier.Exemplaire;
-import bibliotheque.metier.Lecteur;
-import bibliotheque.metier.Rayon;
+import bibliotheque.metier.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ExemplaireModel extends AbstractModel<Exemplaire> implements SpecialExemplaire {
@@ -24,7 +23,21 @@ public class ExemplaireModel extends AbstractModel<Exemplaire> implements Specia
 
     @Override
     public void envoiMailLecteurActuel(Exemplaire ex) {
-     //TODO envoi mail lecteur
+        String mes1 ;
+     Lecteur lecteurActuel=lecteurActuel(ex);
+     List<Exemplaire> exLec = lecteurActuel.listerExemplairesEnLocation();
+
+
+     for(Exemplaire e : exLec){
+         mes1 = e.getMatricule();
+     }
+    
+
+
+        //Mail mail = new Mail("Information : ",message ,LocalDate.now());
+        //ex.envoiMailLecteurActuel(mail);
+
+
     }
 
     @Override
